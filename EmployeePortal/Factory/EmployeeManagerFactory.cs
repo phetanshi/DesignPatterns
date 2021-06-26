@@ -11,10 +11,14 @@ namespace EmployeePortal.Factory
         public IEmployeeManager GetEmployeeManager(int employeeTypeId)
         {
             IEmployeeManager employeeManager = null;
-            if (employeeTypeId == 1)
-                employeeManager = new PermanentEmployeeManager();
-            else if(employeeTypeId == 2)
-                employeeManager = new ContractEmployeeManager();
+
+            switch (employeeTypeId)
+            {
+                case 1:
+                    return new PermanentEmployeeManager();
+                case 2:
+                    return new ContractEmployeeManager();
+            }
 
             return employeeManager;
         }
