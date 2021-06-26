@@ -8,7 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using EmployeePortal.Models;
 using EmployeePortal.Managers;
-using EmployeePortal.Factory;
+using EmployeePortal.Factory.FactoryMethod;
 
 namespace EmployeePortal.Controllers
 {
@@ -54,10 +54,18 @@ namespace EmployeePortal.Controllers
         {
             if (ModelState.IsValid)
             {
+                /*Simple Factory*/
+                //EmployeeManagerFactory empFactory = new EmployeeManagerFactory();
+                //IEmployeeManager employeeManager = empFactory.GetEmployeeManager(employee.EmployeeTypeID);
+                //employee.Bonus = employeeManager.GetBonus();
+                //employee.HourlyPay = employeeManager.GetPay();
+
+
+                /*Fatcory method*/
                 EmployeeManagerFactory empFactory = new EmployeeManagerFactory();
-                IEmployeeManager employeeManager = empFactory.GetEmployeeManager(employee.EmployeeTypeID);
-                employee.Bonus = employeeManager.GetBonus();
-                employee.HourlyPay = employeeManager.GetPay();
+                BaseEmployeeFactory baseEmpFactory = empFactory.CreateFactoy(employee);
+                baseEmpFactory.ApplySalary();
+
                 db.Employees.Add(employee);
                 db.SaveChanges();
                 return RedirectToAction("Index");

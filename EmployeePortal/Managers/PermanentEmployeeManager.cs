@@ -11,10 +11,13 @@ namespace EmployeePortal.Managers
         {
             return 10;
         }
-
         public decimal GetPay()
         {
             return 8;
+        }
+        public decimal GetHouseAllowance()
+        {
+            return 150;
         }
     }
 }
