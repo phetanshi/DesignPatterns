@@ -26,5 +26,6 @@ namespace EmployeePortal.Models
         }
     
         public virtual DbSet<Employee> Employees { get; set; }
+        public virtual DbSet<Employee_Type> Employee_Type { get; set; }
     }
 }
