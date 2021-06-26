@@ -7,6 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using EmployeePortal.Models;
+using EmployeePortal.Managers;
+using EmployeePortal.Factory;
 
 namespace EmployeePortal.Controllers
 {
@@ -52,16 +54,10 @@ namespace EmployeePortal.Controllers
         {
             if (ModelState.IsValid)
             {
-                if(employee.EmployeeTypeID == 1)
-                {
-                    employee.HourlyPay = 8;
-                    employee.Bonus = 10;
-                }
-                else if(employee.EmployeeTypeID == 2)
-                {
-                    employee.HourlyPay = 12;
-                    employee.Bonus = 5;
-                }
+                EmployeeManagerFactory empFactory = new EmployeeManagerFactory();
+                IEmployeeManager employeeManager = empFactory.GetEmployeeManager(employee.EmployeeTypeID);
+                employee.Bonus = employeeManager.GetBonus();
+                employee.HourlyPay = employeeManager.GetPay();
                 db.Employees.Add(employee);
                 db.SaveChanges();
                 return RedirectToAction("Index");
