@@ -6,6 +6,13 @@ using static EmployeePortal.Factory.AbstractFactoryMethod.Enumerations;
 
 namespace EmployeePortal.Factory.AbstractFactoryMethod
 {
+    public class Laptop : ISystemType
+    {
+        public string GetSystemType()
+        {
+            return ComputerTypes.Laptop.ToString();
+        }
+    }
     public class Desktop : ISystemType
     {
         public string GetSystemType()

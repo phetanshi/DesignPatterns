@@ -131,9 +131,9 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Factory\AbstractFactoryMethod\ConcreteProduct\Computers.cs" />
     <Compile Include="Factory\AbstractFactoryMethod\ConcreteProduct\DELL.cs" />
     <Compile Include="Factory\AbstractFactoryMethod\ConcreteFactory\DELLFactory.cs" />
-    <Compile Include="Factory\AbstractFactoryMethod\ConcreteProduct\Desktop.cs" />
     <Compile Include="Factory\AbstractFactoryMethod\ConcreteFactory\EmployeeSystemFactory.cs" />
     <Compile Include="Factory\AbstractFactoryMethod\Client\EmployeeSystemManager.cs" />
     <Compile Include="Factory\AbstractFactoryMethod\Enumerations.cs" />
@@ -141,7 +141,6 @@
     <Compile Include="Factory\AbstractFactoryMethod\AbstractFactory\IComputerFactory.cs" />
     <Compile Include="Factory\AbstractFactoryMethod\AbstractProduct\IProcessor.cs" />
     <Compile Include="Factory\AbstractFactoryMethod\AbstractProduct\ISystemType.cs" />
-    <Compile Include="Factory\AbstractFactoryMethod\ConcreteProduct\Laptop.cs" />
     <Compile Include="Factory\AbstractFactoryMethod\ConcreteProduct\MAC.cs" />
     <Compile Include="Factory\AbstractFactoryMethod\ConcreteFactory\MACFactory.cs" />
     <Compile Include="Factory\AbstractFactoryMethod\ConcreteProduct\Processors.cs" />
