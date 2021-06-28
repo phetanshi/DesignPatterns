@@ -13,4 +13,11 @@ namespace EmployeePortal.Factory.AbstractFactoryMethod
             return Brands.DELL.ToString();
         }
     }
+    public class MAC : IBrand
+    {
+        public string GetBrand()
+        {
+            return Brands.APPLE.ToString();
+        }
+    }
 }
