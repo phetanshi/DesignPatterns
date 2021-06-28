@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using EmployeePortal.Models;
 using EmployeePortal.Managers;
 using EmployeePortal.Factory.FactoryMethod;
+using EmployeePortal.Factory.AbstractFactoryMethod;
 
 namespace EmployeePortal.Controllers
 {
@@ -62,9 +63,19 @@ namespace EmployeePortal.Controllers
 
 
                 /*Fatcory method*/
+                //EmployeeManagerFactory empFactory = new EmployeeManagerFactory();
+                //BaseEmployeeFactory baseEmpFactory = empFactory.CreateFactoy(employee);
+                //baseEmpFactory.ApplySalary();
+
+
+                /*Abstract Fatcory method*/
                 EmployeeManagerFactory empFactory = new EmployeeManagerFactory();
                 BaseEmployeeFactory baseEmpFactory = empFactory.CreateFactoy(employee);
                 baseEmpFactory.ApplySalary();
+                EmployeeSystemFactory employeeSystemFactory = new EmployeeSystemFactory();
+                IComputerFactory factory = employeeSystemFactory.Create(employee);
+                EmployeeSystemManager manager = new EmployeeSystemManager(factory);
+                employee.ComputerDetails = manager.GetSystemDetails();
 
                 db.Employees.Add(employee);
                 db.SaveChanges();

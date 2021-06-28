@@ -15,9 +15,11 @@ namespace EmployeePortal.Factory.FactoryMethod
             switch(emp.EmployeeTypeID)
             {
                 case 1:
-                    return new PermanentEmployeeFactory(emp);
+                    baseEmployee = new PermanentEmployeeFactory(emp);
+                    break;
                 case 2:
-                    return new ContractEmployeeFactory(emp);
+                    baseEmployee = new ContractEmployeeFactory(emp);
+                    break;
             }
 
             return baseEmployee;
