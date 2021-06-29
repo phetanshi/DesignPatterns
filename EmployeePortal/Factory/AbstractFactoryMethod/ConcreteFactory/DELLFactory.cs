@@ -12,7 +12,7 @@ namespace EmployeePortal.Factory.AbstractFactoryMethod
             return new DELL();
         }
 
-        public IProcessor Processor()
+        public virtual IProcessor Processor()
         {
             return new I7();
         }
@@ -25,6 +25,10 @@ namespace EmployeePortal.Factory.AbstractFactoryMethod
 
     public class DELLLaptopFactory : DELLFactory
     {
+        public override IProcessor Processor()
+        {
+            return new I5();
+        }
         public override ISystemType SystemType()
         {
             return new Laptop();

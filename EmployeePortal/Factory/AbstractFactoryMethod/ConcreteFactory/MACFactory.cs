@@ -12,9 +12,9 @@ namespace EmployeePortal.Factory.AbstractFactoryMethod
             return new MAC();
         }
 
-        public IProcessor Processor()
+        public virtual IProcessor Processor()
         {
-            return new I7();
+            return new I5();
         }
 
         public virtual ISystemType SystemType()
@@ -25,6 +25,10 @@ namespace EmployeePortal.Factory.AbstractFactoryMethod
 
     public class MACLaptopFactory : MACFactory
     {
+        public override IProcessor Processor()
+        {
+            return new I7();
+        }
         public override ISystemType SystemType()
         {
             return new Laptop();

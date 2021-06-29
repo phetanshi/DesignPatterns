@@ -10,6 +10,7 @@ using EmployeePortal.Models;
 using EmployeePortal.Managers;
 using EmployeePortal.Factory.FactoryMethod;
 using EmployeePortal.Factory.AbstractFactoryMethod;
+using EmployeePortal.Builder.Product;
 
 namespace EmployeePortal.Controllers
 {
@@ -17,6 +18,21 @@ namespace EmployeePortal.Controllers
     {
         private EmployeePortalEntities db = new EmployeePortalEntities();
 
+        [HttpGet]
+        public ActionResult BuildSystem(int? employeeId)
+        {
+            return View(employeeId);
+        }
+        [HttpPost]
+        public ActionResult BuildSystem(int employeeID, string RAM, string HDDSize)
+        {
+            Employee employee = db.Employees.Find(employeeID);
+            ComputerSystem computerSystem = new ComputerSystem(RAM, HDDSize);
+            employee.SystemConfigurationDetails = computerSystem.Build();
+            db.Entry(employee).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
         // GET: Employees
         public ActionResult Index()
         {
@@ -72,6 +88,7 @@ namespace EmployeePortal.Controllers
                 EmployeeManagerFactory empFactory = new EmployeeManagerFactory();
                 BaseEmployeeFactory baseEmpFactory = empFactory.CreateFactoy(employee);
                 baseEmpFactory.ApplySalary();
+
                 EmployeeSystemFactory employeeSystemFactory = new EmployeeSystemFactory();
                 IComputerFactory factory = employeeSystemFactory.Create(employee);
                 EmployeeSystemManager manager = new EmployeeSystemManager(factory);

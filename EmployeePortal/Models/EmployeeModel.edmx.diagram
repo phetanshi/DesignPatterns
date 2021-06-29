@@ -4,9 +4,9 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="77c96ec2af1042f0a292d6d88eec8871" Name="Diagram1">
-        <EntityTypeShape EntityType="EmployeePortalModel.Employee" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="EmployeePortalModel.Employee_Type" Width="1.5" PointX="2.75" PointY="0.875" />
+      <Diagram DiagramId="77c96ec2af1042f0a292d6d88eec8871" Name="Diagram1" ZoomLevel="96">
+        <EntityTypeShape EntityType="EmployeePortalModel.Employee" Width="2.25" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmployeePortalModel.Employee_Type" Width="1.5" PointX="4.625" PointY="0.875" />
         <AssociationConnector Association="EmployeePortalModel.FK_Employee_Employee_Type" />
       </Diagram>
     </edmx:Diagrams>
