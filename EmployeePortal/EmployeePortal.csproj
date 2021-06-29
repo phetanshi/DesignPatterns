@@ -130,6 +130,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Builder\ConcreteBuilder\DesktopBuilder.cs" />
     <Compile Include="Builder\ConcreteBuilder\LaptopBuilder.cs" />
+    <Compile Include="Builder\Director\ConfigurationBuilder.cs" />
     <Compile Include="Builder\IBuilder\ISystemBuilder.cs" />
     <Compile Include="Builder\Product\ComputerSystem.cs" />
     <Compile Include="Controllers\BaseController.cs" />
@@ -245,6 +246,8 @@
     <Content Include="Views\Employees\Edit.cshtml" />
     <Content Include="Views\Employees\Index.cshtml" />
     <Content Include="Views\Employees\BuildSystem.cshtml" />
+    <Content Include="Views\Employees\BuildDesktop.cshtml" />
+    <Content Include="Views\Employees\BuildLaptop.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EmployeePortal.Logger\EmployeePortal.Logger.csproj">

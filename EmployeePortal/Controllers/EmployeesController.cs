@@ -11,6 +11,9 @@ using EmployeePortal.Managers;
 using EmployeePortal.Factory.FactoryMethod;
 using EmployeePortal.Factory.AbstractFactoryMethod;
 using EmployeePortal.Builder.Product;
+using EmployeePortal.Builder.IBuilder;
+using EmployeePortal.Builder.Director;
+using EmployeePortal.Builder.ConcreteBuilder;
 
 namespace EmployeePortal.Controllers
 {
@@ -19,20 +22,61 @@ namespace EmployeePortal.Controllers
         private EmployeePortalEntities db = new EmployeePortalEntities();
 
         [HttpGet]
-        public ActionResult BuildSystem(int? employeeId)
-        {
-            return View(employeeId);
-        }
-        [HttpPost]
-        public ActionResult BuildSystem(int employeeID, string RAM, string HDDSize)
+        public ActionResult BuildSystem(int? employeeID)
         {
             Employee employee = db.Employees.Find(employeeID);
-            ComputerSystem computerSystem = new ComputerSystem(RAM, HDDSize);
-            employee.SystemConfigurationDetails = computerSystem.Build();
+            if (employee.ComputerDetails.Contains("Laptop"))
+                return View("BuildLaptop", employeeID);
+            else
+                return View("BuildDesktop", employeeID);
+        }
+        [HttpPost]
+        public ActionResult BuildLaptop(FormCollection formCollection)
+        {
+            Employee employee = db.Employees.Find(Convert.ToInt32(formCollection["employeeID"]));
+            //Concrete Builder
+            ISystemBuilder systemBuilder = new LaptopBuilder();
+            //Director
+            ConfigurationBuilder builder = new ConfigurationBuilder();
+            builder.BuildSystem(systemBuilder, formCollection);
+            ComputerSystem system = systemBuilder.GetSystem();
+
+            employee.SystemConfigurationDetails = string.Format("RAM : {0}, HDDSize : {1}, TouchScreen: {2}", system.RAM, system.HDDSize, system.TouchScreen);
+
             db.Entry(employee).State = EntityState.Modified;
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+        [HttpPost]
+        public ActionResult BuildDesktop(FormCollection formCollection)
+        {
+            //Step 1
+            Employee employee = db.Employees.Find(Convert.ToInt32(formCollection["employeeID"]));
+            //Step 2 Concrete Builder
+            ISystemBuilder systemBuilder = new DesktopBuilder();
+            //Step 3 Director
+            ConfigurationBuilder builder = new ConfigurationBuilder();
+            builder.BuildSystem(systemBuilder, formCollection);
+            //Step 4 return the system
+            ComputerSystem system = systemBuilder.GetSystem();
+            employee.SystemConfigurationDetails = string.Format("RAM : {0}, HDDSize : {1}, Keyboard: {2}, Mouse : {3}", system.RAM, system.HDDSize, system.KeyBoard, system.Mouse);
+            db.Entry(employee).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+
+
+        //[HttpPost]
+        //public ActionResult BuildSystem(int employeeID, string RAM, string HDDSize)
+        //{
+        //    Employee employee = db.Employees.Find(employeeID);
+        //    ComputerSystem computerSystem = new ComputerSystem();
+        //    employee.SystemConfigurationDetails = computerSystem.Build();
+        //    db.Entry(employee).State = EntityState.Modified;
+        //    db.SaveChanges();
+        //    return RedirectToAction("Index");
+        //}
         // GET: Employees
         public ActionResult Index()
         {
